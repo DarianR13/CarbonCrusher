@@ -6,6 +6,7 @@ import Calculator from './components/Calculator.vue'
 import Home from './components/Home.vue'
 import Log_in from './components/Log-in.vue'
 import Sign_in from './components/Sign-in.vue'
+import Results from './components/Results.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -13,7 +14,8 @@ const router = createRouter({
         { path: '/calculator', component: Calculator     },
         { path: '/home', component: Home     },
         { path: '/log_in', component: Log_in     },
-        { path: '/sign-in', component: Sign_in     }
+        { path: '/sign-in', component: Sign_in     },
+        { path: '/calculator/results', component: Results     }
       
 
         

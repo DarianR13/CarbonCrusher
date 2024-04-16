@@ -1,11 +1,6 @@
 <template>
-  <h1>Hello App!</h1>
-  <p>
-    <strong>Current route path:</strong> {{ $route.fullPath }}
-  </p>
   <nav>
-    <RouterLink to="/home">Go to Home</RouterLink>
-    <RouterLink to="/calculator">Go to About</RouterLink>
+    <RouterLink to="/calculator">Carbon Footrprint Calculator</RouterLink>
   </nav>
   <main>
     <RouterView />
