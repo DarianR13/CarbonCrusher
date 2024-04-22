@@ -85,6 +85,9 @@
         
     </nav>
 </v-container>
+<footer class="bg-grey-lighten-1 footer">
+     <p>2024 — KDSD, LLC</p> 
+    </footer>
     </template>
 
 <script>
@@ -113,3 +116,11 @@ export default{
 }
 
 </script>
+<style>
+footer{
+position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%
+}
+</style>
