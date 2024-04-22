@@ -13,6 +13,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import Database from './components/Database.vue'
 
 const vuetify = createVuetify({
     components,
@@ -31,7 +32,8 @@ const router = createRouter({
         { path: '/home', component: Home     },
         { path: '/log_in', component: Log_in     },
         { path: '/sign-in', component: Sign_in     },
-        { path: '/calculator/results', component: Results     }
+        { path: '/calculator/results', component: Results     },
+        { path: '/database', component: Database     }
       
 
         
