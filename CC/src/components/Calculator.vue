@@ -1,5 +1,8 @@
 <template>
+    <v-container>
+        <v-col>
    <v-sheet class="mx-auto" width="300">
+    
     <v-form @submit.prevent>
         <v-select
         v-model="NumHousehold"
@@ -74,12 +77,14 @@
         variant="solo"
         ></v-select>
         
-      <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+      <v-btn @click="ResultPage" class="mt-2" type="submit" block>Submit </v-btn>
     </v-form>
   </v-sheet>
+</v-col>
   <nav>
-        <RouterLink to="/calculator/results">Results</RouterLink>
+        
     </nav>
+</v-container>
     </template>
 
 <script>
@@ -97,6 +102,11 @@ export default{
             Car: null,
             Bus: null,
             Plane: null,
+
+        }
+    },
+    methods: {
+        ResultPage(){
 
         }
     }

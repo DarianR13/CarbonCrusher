@@ -1,4 +1,19 @@
 <template>
-    <h1>Home page</h1>
-    <p>Something goes here i guess</p>
-</template>
+    <div>
+      <h2>{{ name }}</h2>
+      <p>{{ message }}</p>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        name: 'Apples',
+        message: 'I like apples'
+      }
+    }
+  };
+  </script>
+  
+  <style></style>
