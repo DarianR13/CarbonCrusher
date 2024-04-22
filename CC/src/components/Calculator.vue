@@ -1,6 +1,6 @@
 <template>
    <v-sheet class="mx-auto" width="300">
-    <v-form @submit.prevent>
+    <v-form @submit.prevent onsubmit = "returnResult()">
         <v-select
         v-model="NumHousehold"
         label="Number of People in Your Household"
@@ -74,12 +74,16 @@
         variant="solo"
         ></v-select>
         
-      <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+      <v-btn @click = "returnResult" class="mt-2" type="submit" block>Submit</v-btn>
     </v-form>
   </v-sheet>
+  
+  <p> {{ Result }}</p>
   <nav>
         <RouterLink to="/calculator/results">Results</RouterLink>
+
     </nav>
+    
     </template>
 
 <script>
@@ -97,8 +101,19 @@ export default{
             Car: null,
             Bus: null,
             Plane: null,
+            Result: 0
+           
 
         }
+        
+    },
+    methods: {
+        returnResult(){
+            this.Result = 1;
+            this.$emit(this.Result);
+
+        }
+ 
     }
 }
 
