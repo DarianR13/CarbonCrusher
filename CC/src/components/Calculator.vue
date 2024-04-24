@@ -146,9 +146,48 @@ export default{
           }
           switch(this.FoodChoices){
             //        :items="['Consume domestic meat daily', 'Consume domestic meat a few times a week', 'Vegetarian', 'Vegan', 'Mainly convenience food', 'Mix of fresh and convenience food', 'Only fresh,localy grown,hunted food' ]"
-
+            case 'Consume domestic meat daily':
+              this.Results +=10;
+              break;
+            case 'Consume domestic meat a few times a week':
+              this.Results +=8;
+              break;
+            case 'Vegan':
+              this.Results +=2;
+              break;
+            case 'Mainly convenience food':
+              this.Results +=12;
+              break;
+            case 'Mainly convenience food':
+              this.Results +=12;
+              break;
+            case 'Mix of fresh and convenience food':
+              this.Results +=6;
+              break;
+            case 'Mix of fresh and convenience food':
+              this.Results +=2;
+              break;
           }
-
+          switch(this.Dishwasher){
+            //        :items="['9+ times', '4-9 times', '1-3 times' , 'I do not have a dishwasher']"
+            case '9+ times':
+              this.Results +=3;
+              break;
+            case '4-9 times':
+              this.Results +=2;
+              break;
+            case '1-3 times':
+              this.Results +=1;
+              break;
+              case 'I do not have a dishwasher':
+              this.Results +=0;
+              break;
+          }
+          switch(this.WashingMachine){
+            //        :items="['9+ times', '4-9 times', '1-3 times' , 'I do not have a washing machine']"
+            case '9+ times':
+              this.Results +=3;
+          }
         }
     }
 }
