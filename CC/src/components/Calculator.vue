@@ -17,12 +17,6 @@
         variant="solo"
         ></v-select>
         <v-select
-        v-model="NumHousehold"
-        label="Food Choices"
-        :items="['Consume domestic meat daily', 'Consume domestic meat a few times a week', 'Vegetarian', 'Vegan', 'Mainly convenience food', 'Mix of fresh and convenience food', 'Only fresh,localy grown,hunted food' ]"
-        variant="solo"
-        ></v-select>
-        <v-select
         v-model="FoodChoices"
         label="Food Choices"
         :items="['Consume domestic meat daily', 'Consume domestic meat a few times a week', 'Vegetarian', 'Vegan', 'Mainly convenience food', 'Mix of fresh and convenience food', 'Only fresh,localy grown,hunted food' ]"
@@ -80,6 +74,7 @@
       <v-btn @click="ResultPage" class="mt-2" type="submit" block>Submit </v-btn>
     </v-form>
   </v-sheet>
+  <p>Result: {{ Results }} </p>
 </v-col>
   <nav>
         
@@ -105,11 +100,54 @@ export default{
             Car: null,
             Bus: null,
             Plane: null,
+            Results: 0
 
         }
     },
     methods: {
         ResultPage(){
+          this.Results =0;
+          switch(this.NumHousehold){
+            //        :items="['1', '2', '3', '4', '5', '6+']"
+            case '1':
+              this.Results +=12;
+              break;
+            case'2':
+              this.Results +=10;
+              break;
+            case'3':
+              this.Results +=8;
+              break;
+            case'4':
+              this.Results +=6;
+              break;
+            case'5':
+              this.Results +=4;
+              break;
+            case'6+':
+              this.Results +=2;
+              break;
+          }
+          switch(this.HouseHoldSize){
+            //        :items="['Large', 'Medium','Small', 'Apartment' ]"
+            case 'Large':
+              this.Results +=10;
+              break;
+            case 'Medium':
+              this.Results +=7;
+              break;
+            case 'Small':
+              this.Results +=4;
+              break;
+            case 'Apartment':
+              this.Results +=2;
+              break;
+
+          }
+          switch(this.FoodChoices){
+            //        :items="['Consume domestic meat daily', 'Consume domestic meat a few times a week', 'Vegetarian', 'Vegan', 'Mainly convenience food', 'Mix of fresh and convenience food', 'Only fresh,localy grown,hunted food' ]"
+
+          }
 
         }
     }
