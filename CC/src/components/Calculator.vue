@@ -46,12 +46,13 @@
         :items="['4+', '3', '2' , '1', 'less than a one can']"
         variant="solo"
         ></v-select>
+       
         <v-select
         v-model="Recycle"
-        label="Wha types of items do you recycle?"
-        :items="['Glass', 'Plastic', 'Paper' , 'Aluminum', 'Steel', 'Composting food waste', 'I do not recycle']"
-        variant="solo"
-        ></v-select>
+        label="Recycle Multiple"
+        :items="['Glass', 'Plastic', 'Paper' , 'Aluminum', 'Steel', 'Composting food waste']"
+        multiple
+      ></v-select>
         <v-select
         v-model="Car"
         label="How many miles do you travel in your personal vehicle a year?"
@@ -74,7 +75,7 @@
       <v-btn @click="ResultPage" class="mt-2" type="submit" block>Submit </v-btn>
     </v-form>
   </v-sheet>
-  <p>Result: {{ Results }} </p>
+  <p>Result: {{ Results }}{{ Rating }} </p>
 </v-col>
   <nav>
         
@@ -100,7 +101,8 @@ export default{
             Car: null,
             Bus: null,
             Plane: null,
-            Results: 0
+            Results: 0,
+            Rating: null,
 
         }
     },
@@ -187,7 +189,186 @@ export default{
             //        :items="['9+ times', '4-9 times', '1-3 times' , 'I do not have a washing machine']"
             case '9+ times':
               this.Results +=3;
+              break;
+            case '4-9 times':
+              this.Results +=2;
+              break;
+            case '1-3 times':
+              this.Results +=1;
+              break;
+            case 'I do not have a washing machine':
+              this.Results +=0;
+              break;
           }
+          switch(this.Purchases){
+            //        :items="['7+', '5-7', '3-5' , '1-2', '0 or only secondhand']"
+            case '7+':
+              this.Results +=10;
+              break;
+            case '5-7':
+              this.Results +=8;
+              break;
+            case '3-5':
+              this.Results +=6;
+              break;
+            case '1-2':
+              this.Results +=4;
+              break;
+            case '0 or only secondhand':
+              this.Results +=2;
+              break;
+          }
+          switch(this.Waste){
+            //        :items="['4+', '3', '2' , '1', 'less than a one can']"
+            case '4+':
+              this.Results += 50;
+              break;
+            case '3':
+              this.Results += 40;
+              break;
+            case '2':
+              this.Results += 30;
+              break;
+            case '1':
+              this.Results += 20;
+              break;
+            case 'less than a one can':
+              this.Results += 20;
+              break;
+          }
+          //:items="['Glass', 'Plastic', 'Paper' , 'Aluminum', 'Steel', 'Composting food waste', 'I do not recycle']"
+
+          if(this.Recycle.includes('Glass')){
+            if(this.Results == 0){
+              
+            }
+            else if(this.Results < 4){
+              this.Results = 0;
+            }
+            else{
+              this.Results -=4;
+            }
+          }
+          if(this.Recycle.includes('Plastic')){
+            if(this.Results == 0){
+              
+            } 
+            else if(this.Results < 4){
+              this.Results = 0;
+            }
+            else{
+              this.Results -=4;
+            }
+          }
+          if(this.Recycle.includes('Paper')){
+            if(this.Results == 0){
+              
+            }
+            else if(this.Results < 4){
+              this.Results = 0;
+            }
+            else{
+              this.Results -=4;
+            }
+          }
+          if(this.Recycle.includes('Aluminum')){
+            if(this.Results == 0){
+              
+            }
+            else if(this.Results < 4){
+              this.Results = 0;
+            }
+            else{
+              this.Results -=4;
+            }
+          }
+          if(this.Recycle.includes('Steel')){
+            if(this.Results == 0){
+              
+            }
+            else if(this.Results < 4){
+              this.Results = 0;
+            }
+            else{
+              this.Results -=4;
+            }
+          }
+          if(this.Recycle.includes('Composting food waste')){
+            if(this.Results == 0){
+              
+            }
+            else if(this.Results < 4){
+              this.Results = 0;
+            }
+            else{
+              this.Results -=4;
+            }
+          }
+          switch(this.Car){
+            //:items="['15,000+', '10,000-15,000', '1,000-10,000', 'less than 1,000', '0 or I do not have a car']"
+            case '15,000+':
+              this.Results += 12;
+              break;
+            case '10,000-15,000':
+              this.Results += 10;
+              break;
+            case '1,000-10,000':
+              this.Results += 6;
+              break;
+            case 'less than 1,000':
+              this.Results += 4;
+              break;
+            case '0 or I do not have a car':
+              this.Results += 0;
+              break;
+              
+          }
+          switch(this.Bus){
+            //:items="['20,000+', '15,000-20,000', '10,000-15,000', '1,000-10,000', 'less than 1,000', '0 or I do not use public transportation']"
+            case '20,000+':
+              this.Results +=12;
+              break;
+            case '15,000-20,000':
+              this.Results +=10;
+              break;
+            case '10,000-15,000':
+              this.Results +=6;
+              break;
+            case '1,000-10,000':
+              this.Results +=6;
+              break;
+            case 'less than 1,000':
+              this.Results +=2;
+              break;
+            case '0 or I do not use public transportation':
+              this.Results +=0;
+              break;
+          }
+          switch(this.Plane){
+            //:items="['Mostely within the state', 'Mostly to nearby states or countries', 'Mostly to other continents', 'I do not fly']"
+            case 'Mostely within the state':
+              this.Results +=2;
+              break;
+            case 'Mostly to nearby states or countries':
+              this.Results +=6;
+              break;
+            case 'Mostly to other continents':
+              this.Results +=20;
+              break;
+            case 'I do not fly':
+              this.Results +=0;
+              break;
+
+            
+          }
+
+          if(this.Resutls <60){
+            this.Rating = "Your score is less than 60. You are making a minimal impact on your enviroment. Great Work!";
+          }
+          else{
+            this.Rating = "Your score is greather than or equal to 60. You making a significant negative impact on the environment. Try to lower your score."
+          }
+
         }
     }
 }
