@@ -1,0 +1,61 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const MongoClient = require('mongodb').MongoClient;
+
+const app = express();
+const port = process.env.PORT || 3000;
+const url = "mongodb+srv://lyricthefirst:jasmine7@kdsdcluster.9buoqvk.mongodb.net/?retryWrites=true&w=majority&appName=KDSDCluster";
+
+app.use(bodyParser.json());
+
+// Endpoint to create a new collection in MongoDB
+app.post('/create-collection', (req, res) => {
+    MongoClient.connect(url, function(err, client) {
+        if (err) {
+            console.error('Error connecting to MongoDB:', err);
+            return res.status(500).json({ error: 'Failed to connect to MongoDB' });
+        }
+        
+        const db = client.db("mydb");
+        
+        // Use the name provided in the request body to create a new collection
+        const collectionName = req.body.collectionName;
+        
+        db.createCollection(collectionName, function(err, collection) {
+            if (err) {
+                console.error('Error creating collection:', err);
+                return res.status(500).json({ error: 'Failed to create collection' });
+            }
+            console.log("Collection created:", collectionName);
+            client.close();
+            return res.status(201).json({ message: 'Collection created successfully' });
+        });
+    });
+});
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
+
+async function createCollection(collectionName) {
+    try {
+        const response = await fetch('mongodb+srv://lyricthefirst:jasmine7@kdsdcluster.9buoqvk.mongodb.net/?retryWrites=true&w=majority&appName=KDSDCluster', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ collectionName })
+        });
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data.message);
+        } else {
+            console.error('Failed to create collection:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error creating collection:', error);
+    }
+}
+
+// Usage example
+createCollection('customers');
