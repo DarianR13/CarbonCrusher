@@ -1,0 +1,77 @@
+//this code sets up a server with routes for handling operations for carbon footprints. It connects to a local mongoDB 
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+//initialize express app
+const app = express();
+const port = process.env.port || 3000;
+
+//connect to MongoDB
+mongoose.connect('mongodb://localhost/carbon-footprint-calculator', { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.log('MongoDB connection error',err));
+
+//define carbonfootprint schema
+const CarbonFootPrintScema = new mongoose.Schema({
+  userId:{
+    type: String,
+    required: true
+  },
+  value:{
+    type: Number,
+    required: true
+  }
+});
+
+//create model from schema
+const CarbonFootPrint = mongoose.model('CarbonFootPrint', CarbonFootPrintScema);
+
+//middleware
+app.use(bodyParser.json());
+
+//routes
+//get all carbon footprints
+app.get('/carbon-footprints', async (req, res) =>{
+  try{
+    const footprints = await CarbonFootPrint.find();
+    res.json(footprints);
+  } catch(err){
+    res.status(500).json({message: err.message});
+  }
+});
+
+//add new carbon footprint
+app.post('/carbon-footprints', async (req, res) =>{
+  userId: req.body.userId,
+    value: req.body.value
+});
+try{
+  const newFootprint = await footprint.save();
+  res.status(201).json(newFootprint);
+} catch(err){
+  res.status(400).json({message: err.message});
+}
+});
+
+//update existing carbon footprint
+app.patch('/carbon-footprints/:id', async (req, res) =>{
+  try{
+    const updatedFootPrint = await CarbonFootPrint.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    res.json(updatedFootPrint);
+  } catch (err){
+    res.status(500).json({message: err.message});
+  }
+});
+
+//delete carbon footprint
+app.delete(('/carbon-footprints/:id', async (req, res) =>{
+  try{
+    await CarbonFootPrint.findByIdAndRemove(req.params.id);
+    res.json({message: 'Carbon footprint deleted successfully'});
+  } catch(err){
+    res.status(500).json({message: err.message});
+  }
+});
+
+app.listen(port, () => console.log('Server running on port ${port}'));
