@@ -1,0 +1,16 @@
+Download Vue3 with either of these 2 links:
+https://vuejs.org/guide/quick-start
+or
+https://v3.ru.vuejs.org/guide/installation.html
+
+If you used the first link, clone this repository use the following commands:
+cd <this repository location>
+npm install
+npm run dev
+
+If you used the second link follow their intructions in the link to run the application.
+
+We used the first link to run the application.
+
+If this does not work, please refer to our application videos instead.
+
